@@ -13,14 +13,12 @@ public class Triangle {
         this.third = cp;
     }
 
-    public double semiPerimeter(Point ap, Point bp, Point cp) {
-        return (ap.distance(bp) + bp.distance(cp) + cp.distance(ap)) / 2;
+    public double semiPerimeter(double a, double b, double c) {
+        return (a + b + c) / 2;
     }
 
-    public boolean exist(Point ap, Point bp, Point cp) {
-        return ap.distance(bp) + bp.distance(cp) > cp.distance(ap)
-               && bp.distance(cp) + cp.distance(ap) > ap.distance(bp)
-               && cp.distance(ap) + ap.distance(bp) > bp.distance(cp);
+    public boolean exist(double ab, double ac, double bc) {
+        return ab + ac > bc && ac + bc > ab && ab + bc > ac;
     }
 
     public double area() {
@@ -28,8 +26,8 @@ public class Triangle {
         double ab = first.distance(second);
         double ac = first.distance(third);
         double bc = second.distance(third);
-        if (this.exist(first, second, third)) {
-            double p = semiPerimeter(first, second, third);
+        if (this.exist(ab, ac, bc)) {
+            double p = semiPerimeter(ab, ac, bc);
             rsl = sqrt(p * (p - ab) * (p - ac) * (p - bc));
         }
         return rsl;
