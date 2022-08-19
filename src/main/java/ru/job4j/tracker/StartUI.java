@@ -3,7 +3,6 @@ package ru.job4j.tracker;
 import java.util.Scanner;
 
 public class StartUI {
-
     public void init(Scanner scanner, Tracker tracker) {
         boolean run = true;
         while (run) {
@@ -12,9 +11,6 @@ public class StartUI {
             int select = Integer.parseInt(scanner.nextLine());
             if (select != 6) {
                 System.out.println("Пользователь выбрал: " + select);
-                switch (select) {
-                    case 1 -> tracker.add();
-                }
             } else {
                 run = false;
             }
@@ -28,8 +24,8 @@ public class StartUI {
                 "Exit Program"
         };
         System.out.println("Menu:");
-        for (int i = 0; i < menu.length; i++) {
-            System.out.println(i + ". " + menu[i]);
+        for (int index = 0; index < menu.length; index++) {
+            System.out.println(index + ". " + menu[index]);
         }
     }
 
