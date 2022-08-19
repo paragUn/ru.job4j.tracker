@@ -17,7 +17,7 @@ public class Library {
             System.out.println(currentBook.getName() + " " + currentBook.getCountOfPappers());
         }
         for (Book currentBook : arrayOfBooks) {
-            if (currentBook.getName().equals("Clean Code")) {
+            if ("Clean Code".equals(currentBook.getName())) {
                 System.out.println(currentBook.getName() + " " + currentBook.getCountOfPappers());
             }
         }
