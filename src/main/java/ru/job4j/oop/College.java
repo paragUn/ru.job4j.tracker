@@ -2,8 +2,8 @@ package ru.job4j.oop;
 
 public class College {
     public static void main(String[] args) {
-        Freshman freshmanToStu = new Freshman();
-        Student studentToObj = freshmanToStu;
-        Object freshmanToObj = studentToObj;
+        Freshman freshman = new Freshman();
+        Student student = freshman;
+        Object freshmanToObj = freshman;
     }
 }
