@@ -1,11 +1,6 @@
 package ru.job4j.early;
 
 public class PasswordValidator {
-    private static boolean flagContainUpperLetter = false;
-    private static boolean flagContainLowerLetter = false;
-    private static boolean flagContainDigit = false;
-    private static boolean flagContainSpecialSym = false;
-    private static boolean flagContainSubstring = false;
 
     public static String validate(String password) {
         if (password == null || password.isEmpty()) {
@@ -14,17 +9,16 @@ public class PasswordValidator {
         if (password.length() < 8 || password.length() > 32) {
             return "The password length must be in the range [8,32]!!";
         }
-        validateSymbols(password);
-        if (!flagContainDigit) {
+        if (!containDigit(password)) {
             return "The password must contain numbers";
         }
-        if (!flagContainUpperLetter) {
+        if (!containUpperLetter(password)) {
             return "The password must contain upper letter";
         }
-        if (!flagContainLowerLetter) {
+        if (!containLowerLetter(password)) {
             return "The password must contain lower letter";
         }
-        if (!flagContainSpecialSym) {
+        if (!containSpecialSym(password)) {
             return "The password must contain special symbols";
         }
         if (!containSubstring(password)) {
@@ -33,32 +27,66 @@ public class PasswordValidator {
         return password;
     }
 
-    private static void validateSymbols(String password) {
+    private static boolean containDigit(String password) {
+        boolean result  = false;
         for (int index = 0; index < password.length(); index++) {
             char current = password.charAt(index);
             if (Character.isDigit(current)) {
-                flagContainDigit = true;
+                result = true;
+                break;
             }
+        }
+        return result;
+    }
+
+    private static boolean containUpperLetter(String password) {
+        boolean result  = false;
+        for (int index = 0; index < password.length(); index++) {
+            char current = password.charAt(index);
             if (Character.isUpperCase(current)) {
-                flagContainUpperLetter = true;
+                result = true;
+                break;
             }
+        }
+        return result;
+    }
+
+    private static boolean containLowerLetter(String password) {
+        boolean result  = false;
+        for (int index = 0; index < password.length(); index++) {
+            char current = password.charAt(index);
             if (Character.isLowerCase(current)) {
-                flagContainLowerLetter = true;
+                result = true;
+                break;
             }
+        }
+        return result;
+    }
+
+    private static boolean containSpecialSym(String password) {
+        boolean result  = false;
+        for (int index = 0; index < password.length(); index++) {
+            char current = password.charAt(index);
             if ((current > 31 && current < 48)
                     || (current > 57 && current < 64)
                     || (current > 90 && current < 97)
                     || (current > 122 && current < 127)) {
-                flagContainSpecialSym = true;
+                result = true;
+                break;
             }
         }
+        return result;
     }
 
     private static boolean containSubstring(String password) {
-            return password.contains("qwerty")
-                || password.contains("12345")
-                || password.contains("password")
-                || password.contains("admin")
-                || password.contains("user");
+            return !password.contains("qwerty")
+                && !password.contains("12345")
+                && !password.contains("password")
+                && !password.contains("admin")
+                && !password.contains("user");
+    }
+
+    public static void main(String[] args) {
+        System.out.println(validate("MG+78F}^C74"));
     }
 }
