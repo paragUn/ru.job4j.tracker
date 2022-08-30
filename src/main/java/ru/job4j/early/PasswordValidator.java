@@ -22,7 +22,7 @@ public class PasswordValidator {
             return "The password must contain special symbols";
         }
         if (!containSubstring(password)) {
-            return "The password must not contain substrings: qwerty, 12345, password, admin, user!!";
+            return "The password must not contain substrings: qwerty, 12345, password, admin, user";
         }
         return password;
     }
@@ -79,14 +79,10 @@ public class PasswordValidator {
     }
 
     private static boolean containSubstring(String password) {
-            return !password.contains("qwerty")
-                && !password.contains("12345")
-                && !password.contains("password")
-                && !password.contains("admin")
-                && !password.contains("user");
-    }
-
-    public static void main(String[] args) {
-        System.out.println(validate("MG+78F}^C74"));
+            return !password.toLowerCase().contains("qwerty")
+                && !password.toLowerCase().contains("12345")
+                && !password.toLowerCase().contains("password")
+                && !password.toLowerCase().contains("admin")
+                && !password.toLowerCase().contains("user");
     }
 }

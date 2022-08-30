@@ -9,8 +9,8 @@ class PasswordValidatorTest {
 
     @Test
     public void whenValidPassword() {
-        String in = "MG+7n8Fz}^C74p";
-        String expected = "MG+7n8Fz}^C74p";
+        String in = "MG+7n8Fz}^C74";
+        String expected = "MG+7n8Fz}^C74";
         String result = PasswordValidator.validate(in);
         assertThat(result).isEqualTo(expected);
     }
@@ -81,15 +81,15 @@ class PasswordValidatorTest {
 
     @Test
     public void whenContainQwerty() {
-        String expected = "The password must not contain substrings: qwerty, 12345, password, admin, user!!";
-        String in = "MG+7n8Fz}^C74pqwerty";
+        String expected = "The password must not contain substrings: qwerty, 12345, password, admin, user";
+        String in = "MG+7n8Fz}^C74pqWeRtY";
         String result = PasswordValidator.validate(in);
         assertThat(result).isEqualTo(expected);
     }
 
     @Test
     public void whenContain12345() {
-        String expected = "The password must not contain substrings: qwerty, 12345, password, admin, user!!";
+        String expected = "The password must not contain substrings: qwerty, 12345, password, admin, user";
         String in = "MG+7n8F12345z}^C74p";
         String result = PasswordValidator.validate(in);
         assertThat(result).isEqualTo(expected);
@@ -97,7 +97,7 @@ class PasswordValidatorTest {
 
     @Test
     public void whenContainLiterallyPassword() {
-        String expected = "The password must not contain substrings: qwerty, 12345, password, admin, user!!";
+        String expected = "The password must not contain substrings: qwerty, 12345, password, admin, user";
         String in = "MG+pasSword7n8Fz}^C74p";
         String result = PasswordValidator.validate(in);
         assertThat(result).isEqualTo(expected);
@@ -105,16 +105,16 @@ class PasswordValidatorTest {
 
     @Test
     public void whenContainLiterallyAdmin() {
-        String expected = "The password must not contain substrings: qwerty, 12345, password, admin, user!!";
-        String in = "MG+7n8Fz}^Cadmin74p";
+        String expected = "The password must not contain substrings: qwerty, 12345, password, admin, user";
+        String in = "MG+7n8Fz}^CAdmin74p";
         String result = PasswordValidator.validate(in);
         assertThat(result).isEqualTo(expected);
     }
 
     @Test
     public void whenContainLiterallyUsEr() {
-        String expected = "The password must not contain substrings: qwerty, 12345, password, admin, user!!";
-        String in = "MG+7n8Fz}user^74p";
+        String expected = "The password must not contain substrings: qwerty, 12345, password, admin, user";
+        String in = "MG+7n8Fz}UsEr^74p";
         String result = PasswordValidator.validate(in);
         assertThat(result).isEqualTo(expected);
     }
