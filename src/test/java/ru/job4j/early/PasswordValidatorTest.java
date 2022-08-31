@@ -33,89 +33,90 @@ class PasswordValidatorTest {
 
     @Test
     public void whenLengthLessThan8Password() {
-        String in = "MG+7n";
-        String expected = "The password length must be in the range [8,32]!!";
-        String result = PasswordValidator.validate(in);
-        assertThat(result).isEqualTo(expected);
+        IllegalArgumentException exception = assertThrows(
+                IllegalArgumentException.class,
+                () -> PasswordValidator.validate("MG+7n"));
+        assertThat(exception.getMessage()).isEqualTo("The password length must be in the range [8,32]!!");
     }
 
     @Test
     public void whenLengthGreaterThan32Password() {
-        String in = "ni|P,Qsa0F874{.RJ|v50K5{aLO%3&bt0";
-        String expected = "The password length must be in the range [8,32]!!";
-        String result = PasswordValidator.validate(in);
-        assertThat(result).isEqualTo(expected);
+        IllegalArgumentException exception = assertThrows(
+                IllegalArgumentException.class,
+                () -> PasswordValidator.validate("ni|P,Qsa0F874{.RJ|v50K5{aLO%3&bt0"));
+        assertThat(exception.getMessage()).isEqualTo("The password length must be in the range [8,32]!!");
     }
 
     @Test
     public void whenDoesNotContainNumber() {
-        String in = "MG+nFz}^Cp";
-        String expected = "The password must contain numbers";
-        String result = PasswordValidator.validate(in);
-        assertThat(result).isEqualTo(expected);
+        IllegalArgumentException exception = assertThrows(
+                IllegalArgumentException.class,
+                () -> PasswordValidator.validate("MG+nFz}^Cp"));
+        assertThat(exception.getMessage()).isEqualTo("The password must contain numbers");
     }
 
     @Test
     public void whenDoesNotContainUpperLetter() {
-        String in = "+7n8z}^74p";
-        String expected = "The password must contain upper letter";
-        String result = PasswordValidator.validate(in);
-        assertThat(result).isEqualTo(expected);
+        IllegalArgumentException exception = assertThrows(
+                IllegalArgumentException.class,
+                () -> PasswordValidator.validate("+7n8z}^74p"));
+        assertThat(exception.getMessage()).isEqualTo("The password must contain upper letter");
     }
 
     @Test
     public void whenDoesNotContainLowerLetter() {
-        String expected = "The password must contain lower letter";
-        String in = "MG+78F}^C74";
-        String result = PasswordValidator.validate(in);
-        assertThat(result).isEqualTo(expected);
+        IllegalArgumentException exception = assertThrows(
+                IllegalArgumentException.class,
+                () -> PasswordValidator.validate("MG+78F}^C74"));
+        assertThat(exception.getMessage()).isEqualTo("The password must contain lower letter");
     }
 
     @Test
     public void whenDoesNotContainSpecialSymbols() {
-        String expected = "The password must contain special symbols";
-        String in = "MG7n8FzC74p";
-        String result = PasswordValidator.validate(in);
-        assertThat(result).isEqualTo(expected);
+        IllegalArgumentException exception = assertThrows(
+                IllegalArgumentException.class,
+                () -> PasswordValidator.validate("MG7n8FzC74p"));
+        assertThat(exception.getMessage()).isEqualTo("The password must contain special symbols");
     }
 
     @Test
     public void whenContainQwerty() {
-        String expected = "The password must not contain substrings: qwerty, 12345, password, admin, user";
-        String in = "MG+7n8Fz}^C74pqWeRtY";
-        String result = PasswordValidator.validate(in);
-        assertThat(result).isEqualTo(expected);
+        IllegalArgumentException exception = assertThrows(
+                IllegalArgumentException.class,
+                () -> PasswordValidator.validate("MG+7n8Fz}^C74pqWeRtY"));
+        assertThat(exception.getMessage()).isEqualTo("The password must not contain substrings: qwerty, 12345, password, admin, user");
+
     }
 
     @Test
     public void whenContain12345() {
-        String expected = "The password must not contain substrings: qwerty, 12345, password, admin, user";
-        String in = "MG+7n8F12345z}^C74p";
-        String result = PasswordValidator.validate(in);
-        assertThat(result).isEqualTo(expected);
+        IllegalArgumentException exception = assertThrows(
+                IllegalArgumentException.class,
+                () -> PasswordValidator.validate("MG+7n8F12345z}^C74p"));
+        assertThat(exception.getMessage()).isEqualTo("The password must not contain substrings: qwerty, 12345, password, admin, user");
     }
 
     @Test
     public void whenContainLiterallyPassword() {
-        String expected = "The password must not contain substrings: qwerty, 12345, password, admin, user";
-        String in = "MG+pasSword7n8Fz}^C74p";
-        String result = PasswordValidator.validate(in);
-        assertThat(result).isEqualTo(expected);
+        IllegalArgumentException exception = assertThrows(
+                IllegalArgumentException.class,
+                () -> PasswordValidator.validate("MG+pasSword7n8Fz}^C74p"));
+        assertThat(exception.getMessage()).isEqualTo("The password must not contain substrings: qwerty, 12345, password, admin, user");
     }
 
     @Test
     public void whenContainLiterallyAdmin() {
-        String expected = "The password must not contain substrings: qwerty, 12345, password, admin, user";
-        String in = "MG+7n8Fz}^CAdmin74p";
-        String result = PasswordValidator.validate(in);
-        assertThat(result).isEqualTo(expected);
+        IllegalArgumentException exception = assertThrows(
+                IllegalArgumentException.class,
+                () -> PasswordValidator.validate("MG+7n8Fz}^CAdmin74p"));
+        assertThat(exception.getMessage()).isEqualTo("The password must not contain substrings: qwerty, 12345, password, admin, user");
     }
 
     @Test
     public void whenContainLiterallyUsEr() {
-        String expected = "The password must not contain substrings: qwerty, 12345, password, admin, user";
-        String in = "MG+7n8Fz}UsEr^74p";
-        String result = PasswordValidator.validate(in);
-        assertThat(result).isEqualTo(expected);
+        IllegalArgumentException exception = assertThrows(
+                IllegalArgumentException.class,
+                () -> PasswordValidator.validate("MG+7n8Fz}UsEr^74p"));
+        assertThat(exception.getMessage()).isEqualTo("The password must not contain substrings: qwerty, 12345, password, admin, user");
     }
 }

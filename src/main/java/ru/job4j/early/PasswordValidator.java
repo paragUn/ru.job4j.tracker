@@ -7,22 +7,22 @@ public class PasswordValidator {
             throw new IllegalArgumentException("Empty password.");
         }
         if (password.length() < 8 || password.length() > 32) {
-            return "The password length must be in the range [8,32]!!";
+            throw new IllegalArgumentException("The password length must be in the range [8,32]!!");
         }
         if (!containDigit(password)) {
-            return "The password must contain numbers";
+            throw new IllegalArgumentException("The password must contain numbers");
         }
         if (!containUpperLetter(password)) {
-            return "The password must contain upper letter";
+            throw new IllegalArgumentException("The password must contain upper letter");
         }
         if (!containLowerLetter(password)) {
-            return "The password must contain lower letter";
+            throw new IllegalArgumentException("The password must contain lower letter");
         }
         if (!containSpecialSym(password)) {
-            return "The password must contain special symbols";
+            throw new IllegalArgumentException("The password must contain special symbols");
         }
         if (!containSubstring(password)) {
-            return "The password must not contain substrings: qwerty, 12345, password, admin, user";
+            throw new IllegalArgumentException("The password must not contain substrings: qwerty, 12345, password, admin, user");
         }
         return password;
     }
