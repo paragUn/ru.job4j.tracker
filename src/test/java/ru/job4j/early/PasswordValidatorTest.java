@@ -10,7 +10,7 @@ class PasswordValidatorTest {
     @Test
     public void whenValidPassword() {
         String in = "MG+7n8Fz}^C74";
-        String expected = "MG+7n8Fz}^C74";
+        String expected = "Your password is valid!";
         String result = PasswordValidator.validate(in);
         assertThat(result).isEqualTo(expected);
     }

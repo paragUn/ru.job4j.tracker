@@ -24,7 +24,7 @@ public class PasswordValidator {
         if (!containSubstring(password)) {
             throw new IllegalArgumentException("The password must not contain substrings: qwerty, 12345, password, admin, user");
         }
-        return password;
+        return "Your password is valid!";
     }
 
     private static boolean containDigit(String password) {
