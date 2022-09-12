@@ -13,15 +13,13 @@ public class BankService {
     }
 
     public void addAccount(String passport, Account account) {
+        List<Account> list = new ArrayList<>();
         User user = findByPassport(passport);
-        List<Account> value;
-        for (User key : users.keySet()) {
-            if (user != null && user.getPassport().equals(key.getPassport())) {
-                value = users.get(key);
-                if (!value.contains(account)) {
-                    value.add(account);
-                }
-            }
+        if (user != null) {
+            list = users.get(user);
+        }
+        if (!list.contains(account)) {
+            list.add(account);
         }
     }
 
@@ -30,25 +28,23 @@ public class BankService {
         for (User key : users.keySet()) {
            if (key.getPassport().equals(passport)) {
                result = key;
+               break;
            }
         }
         return result;
     }
 
     public Account findByRequisite(String passport, String requisite) {
+        List<Account> list = new ArrayList<>();
         Account result = null;
-        List<Account> value = null;
         User user = findByPassport(passport);
-        for (User key : users.keySet()) {
-            if (user != null && user.getPassport().equals(key.getPassport())) {
-                value = users.get(key);
-            }
+        if (user != null) {
+            list = users.get(user);
         }
-        if (value != null) {
-            for (Account currentQAccount : value) {
-                if (currentQAccount.getRequisite().equals(requisite)) {
-                    result = currentQAccount;
-                }
+        for (Account currentQAccount : list) {
+            if (currentQAccount.getRequisite().equals(requisite)) {
+                result = currentQAccount;
+                break;
             }
         }
         return result;
