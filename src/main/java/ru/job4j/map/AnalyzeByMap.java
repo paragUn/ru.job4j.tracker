@@ -34,7 +34,6 @@ public class AnalyzeByMap {
     public static List<Label> averageScoreBySubject(List<Pupil> pupils) {
         List<Label> result = new ArrayList<>();
         Map<String, Integer> temp = new LinkedHashMap<>();
-        int score = 0;
         for (Pupil pupil : pupils) {
             for (Subject subject : pupil.subjects()) {
                 if (temp.containsKey(subject.name())) {
@@ -45,19 +44,41 @@ public class AnalyzeByMap {
             }
         }
         for (Map.Entry<String, Integer> map : temp.entrySet()) {
-            String name = map.getKey();
-            int value = map.getValue();
-            result.add(new Label(name, value / pupils.size()));
+            result.add(new Label(map.getKey(), map.getValue() / pupils.size()));
         }
         return result;
     }
 
     public static Label bestStudent(List<Pupil> pupils) {
-
-        return null;
+        List<Label> result = new ArrayList<>();
+        double score = 0;
+        for (Pupil pupil : pupils) {
+            for (Subject subject : pupil.subjects()) {
+                score += subject.score();
+            }
+            result.add(new Label(pupil.name(), score));
+            score = 0;
+        }
+        Collections.sort(result);
+        return result.get(result.size() - 1);
     }
 
     public static Label bestSubject(List<Pupil> pupils) {
-        return null;
+        Map<String, Integer> temp = new LinkedHashMap<>();
+        List<Label> result = new ArrayList<>();
+        for (Pupil pupil : pupils) {
+            for (Subject subject : pupil.subjects()) {
+                if (temp.containsKey(subject.name())) {
+                    temp.put(subject.name(), subject.score() + temp.get(subject.name()));
+                } else {
+                    temp.put(subject.name(), subject.score());
+                }
+            }
+        }
+        for (Map.Entry<String, Integer> map : temp.entrySet()) {
+            result.add(new Label(map.getKey(), map.getValue()));
+        }
+        Collections.sort(result);
+        return result.get(result.size() - 1);
     }
 }
