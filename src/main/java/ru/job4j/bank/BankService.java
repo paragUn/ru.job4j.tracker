@@ -38,9 +38,9 @@ public class BankService {
         User user = findByPassport(passport);
         if (user != null) {
             List<Account> list = users.get(user);
-            for (Account currentQAccount : list) {
-                if (currentQAccount.getRequisite().equals(requisite)) {
-                    result = currentQAccount;
+            for (Account currentAccount : list) {
+                if (currentAccount.getRequisite().equals(requisite)) {
+                    result = currentAccount;
                     break;
                 }
             }
