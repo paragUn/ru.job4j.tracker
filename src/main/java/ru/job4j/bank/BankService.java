@@ -13,13 +13,12 @@ public class BankService {
     }
 
     public void addAccount(String passport, Account account) {
-        List<Account> list = new ArrayList<>();
         User user = findByPassport(passport);
         if (user != null) {
-            list = users.get(user);
-        }
-        if (!list.contains(account)) {
-            list.add(account);
+            List<Account> list = users.get(user);
+            if (!list.contains(account)) {
+                list.add(account);
+            }
         }
     }
 
@@ -35,16 +34,15 @@ public class BankService {
     }
 
     public Account findByRequisite(String passport, String requisite) {
-        List<Account> list = new ArrayList<>();
         Account result = null;
         User user = findByPassport(passport);
         if (user != null) {
-            list = users.get(user);
-        }
-        for (Account currentQAccount : list) {
-            if (currentQAccount.getRequisite().equals(requisite)) {
-                result = currentQAccount;
-                break;
+            List<Account> list = users.get(user);
+            for (Account currentQAccount : list) {
+                if (currentQAccount.getRequisite().equals(requisite)) {
+                    result = currentQAccount;
+                    break;
+                }
             }
         }
         return result;
