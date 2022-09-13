@@ -7,14 +7,4 @@ public class ItemAscByName implements Comparator<Item> {
     public int compare(Item left, Item right) {
         return left.getName().compareTo(right.getName());
     }
-
-    @Override
-    public int hashCode() {
-        return super.hashCode();
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-        return super.equals(obj);
-    }
 }
