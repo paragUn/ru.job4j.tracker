@@ -30,4 +30,7 @@ public class AttachmentSort {
         attachments.sort(comparatorByName);
         System.out.println(attachments);
     }
+
+    Comparator<String> cmpText = (left, right) ->  left.compareTo(right);
+    Comparator<String> cmpDescSize = (left, right) -> right.compareTo(left);
 }
