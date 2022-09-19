@@ -100,7 +100,6 @@ public class DepartmentsTest {
                 "K1/SK2"
         );
         Departments.sortDesc(input);
-        System.out.println(input);
         assertThat(input).containsAll(expect);
     }
 
