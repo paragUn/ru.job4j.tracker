@@ -2,17 +2,11 @@ package ru.job4j.stream;
 
 public class User {
     private String name;
-
     private String surname;
-
     private byte age;
-
     private String login;
-
     private String password;
-
     private boolean activated;
-
     private String gender;
 
     static class Builder {
