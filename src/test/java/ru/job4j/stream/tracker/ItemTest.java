@@ -1,6 +1,9 @@
-package ru.job4j.tracker;
+package ru.job4j.stream.tracker;
 
 import org.junit.jupiter.api.Test;
+import ru.job4j.tracker.Item;
+import ru.job4j.tracker.ItemAscByName;
+import ru.job4j.tracker.ItemDescByName;
 
 import java.util.ArrayList;
 import java.util.List;

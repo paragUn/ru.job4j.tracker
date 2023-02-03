@@ -1,6 +1,7 @@
-package ru.job4j.tracker;
+package ru.job4j.stream.tracker;
 
 import org.junit.jupiter.api.Test;
+import ru.job4j.tracker.*;
 
 import static org.assertj.core.api.Assertions.assertThat;
 

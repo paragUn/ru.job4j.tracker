@@ -3,7 +3,7 @@ package ru.job4j.tracker;
 import java.util.List;
 
 public final class SingleTracker {
-    private Tracker tracker = new Tracker();
+    private Store tracker = new SqlTracker();
     private static SingleTracker instance = null;
 
     private SingleTracker() {
