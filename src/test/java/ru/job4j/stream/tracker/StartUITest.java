@@ -33,7 +33,7 @@ public class StartUITest {
                 new String[] {"0", String.valueOf(item.getId()), replacedName,  "1"}
         );
         List<UserAction> actions = new ArrayList<>();
-        actions.add(new EditAction(out));
+        actions.add(new ReplaceAction(out));
         actions.add(new ExitAction(out));
         new StartUI(out).init(in, tracker, actions);
         assertThat(tracker.findById(item.getId()).getName()).isEqualTo(replacedName);
@@ -82,7 +82,7 @@ public class StartUITest {
                 new String[] {"0", String.valueOf(one.getId()), replaceName, "1"}
         );
         List<UserAction> actions = new ArrayList<>();
-        actions.add(new EditAction(out));
+        actions.add(new ReplaceAction(out));
         actions.add(new ExitAction(out));
         new StartUI(out).init(in, tracker, actions);
         String ln = System.lineSeparator();
