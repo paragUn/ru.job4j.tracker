@@ -37,11 +37,6 @@ public class SqlTrackerTest {
         }
     }
 
-    @AfterAll
-    public static void closeConnection() throws SQLException {
-        connection.close();
-    }
-
     @AfterEach
     public void wipeTable() throws SQLException {
         try (PreparedStatement statement = connection.prepareStatement("delete from items")) {
@@ -49,34 +44,35 @@ public class SqlTrackerTest {
         }
     }
 
+    @AfterAll
+    public static void closeConnection() throws SQLException {
+        connection.close();
+    }
+
     @Test
     public void whenSaveItemAndFindByGeneratedIdThenMustBeTheSame() {
         SqlTracker tracker = new SqlTracker(connection);
-        Item item = new Item("item");
-        tracker.add(item);
+        Item item = tracker.add(new Item("item"));
         assertThat(tracker.findById(item.getId())).isEqualTo(item);
     }
 
     @Test
     public void whenAddThenReplace() {
         SqlTracker tracker = new SqlTracker(connection);
-        Item item = new Item("item1");
+        Item item = tracker.add(new Item("item1"));
         Item item2 = new Item("item2");
-        tracker.add(item);
-        assertThat(tracker.replace(1, item2)).isTrue();
-        assertThat(tracker.findById(1)).isEqualTo(item2);
+        item2.setId(item.getId());
+        assertThat(tracker.replace(item.getId(), item2)).isTrue();
+        assertThat(tracker.findByName(item2.getName())).isEqualTo(List.of(item2));
     }
 
     @Test
-    public void whenAddThenDelete() {
+    public void whenAddThenDeleteMustBeNull() {
         SqlTracker tracker = new SqlTracker(connection);
         Item item = new Item("item1");
         tracker.add(item);
-        tracker.delete(1);
-        assertThat(tracker.delete(1)).isTrue();
-        assertThat(tracker.findAll())
-                .isEqualTo(List.of())
-                .hasSize(0);
+        assertThat(tracker.delete(item.getId())).isTrue();
+        assertThat(tracker.findById(item.getId())).isNull();
     }
 
     @Test
@@ -87,6 +83,5 @@ public class SqlTrackerTest {
         assertThat(tracker.findByName("item1"))
                 .isEqualTo(List.of(item))
                 .hasSize(1);
-
     }
 }

@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
-public class SqlTracker implements Store {
+public class SqlTracker implements Store, AutoCloseable {
     private Connection cn;
 
     public SqlTracker() {
@@ -110,18 +110,17 @@ public class SqlTracker implements Store {
 
     @Override
     public Item findById(int id) {
-        Item item = null;
-        try (PreparedStatement ps = cn.prepareStatement("select * from items where name = ?")) {
+        try (PreparedStatement ps = cn.prepareStatement("select * from items where id = ?")) {
             ps.setInt(1, id);
             try (ResultSet rs = ps.executeQuery()) {
                 if (rs.next()) {
-                    item = createItem(rs);
+                    return createItem(rs);
                 }
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return item;
+        return null;
     }
 
     @Override
