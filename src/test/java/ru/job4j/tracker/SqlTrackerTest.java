@@ -84,4 +84,15 @@ public class SqlTrackerTest {
                 .isEqualTo(List.of(item))
                 .hasSize(1);
     }
+
+    @Test
+    public void whenFindAll() {
+        SqlTracker tracker = new SqlTracker(connection);
+        Item item1 = new Item("item1");
+        Item item2 = new Item("item2");
+        tracker.add(item1);
+        tracker.add(item2);
+        assertThat(tracker.findAll()).isEqualTo(List.of(item1, item2))
+                .hasSize(2);
+    }
 }
